@@ -1,8 +1,8 @@
 package api
 
 import (
+	db "github.com/Jonaxn/banksystem/db/sqlc"
 	"github.com/gin-gonic/gin"
-	db "github.com/jonaxn/banksystem/db/sqlc"
 )
 
 // Server serves HTTP requests for our banking service.

@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/jonaxn/banksystem/api"
-	db "github.com/jonaxn/banksystem/db/sqlc"
-	"github.com/jonaxn/banksystem/util"
+	"github.com/Jonaxn/banksystem/api"
+	db "github.com/Jonaxn/banksystem/db/sqlc"
+	"github.com/Jonaxn/banksystem/util"
 	_ "github.com/lib/pq"
 )
 

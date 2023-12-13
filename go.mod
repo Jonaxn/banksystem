@@ -1,4 +1,4 @@
-module github.com/jonaxn/banksystem
+module github.com/Jonaxn/banksystem
 
 go 1.15
 
