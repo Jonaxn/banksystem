@@ -28,7 +28,7 @@
   make postgres
   ```
 
-- Create simple_bank database:
+- Create bank_system database:
 
   ```bash
   make createdb
