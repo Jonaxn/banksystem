@@ -8,11 +8,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	mockdb "github.com/Jonaxn/banksystem/db/mock"
-	db "github.com/Jonaxn/banksystem/db/sqlc"
-	"github.com/Jonaxn/banksystem/util"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/mock/gomock"
+	mockdb "github.com/jonaxn/banksystem/db/mock"
+	db "github.com/jonaxn/banksystem/db/sqlc"
+	"github.com/jonaxn/banksystem/util"
 	"github.com/stretchr/testify/require"
 )
 
@@ -201,7 +201,7 @@ func TestTransferAPI(t *testing.T) {
 			store := mockdb.NewMockStore(ctrl)
 			tc.buildStubs(store)
 
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			// Marshal body data to JSON
