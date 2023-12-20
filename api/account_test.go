@@ -11,12 +11,12 @@ import (
 	"testing"
 	"time"
 
+	mockdb "github.com/Jonaxn/banksystem/db/mock"
+	db "github.com/Jonaxn/banksystem/db/sqlc"
+	"github.com/Jonaxn/banksystem/token"
+	"github.com/Jonaxn/banksystem/util"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/mock/gomock"
-	mockdb "github.com/jonaxn/banksystem/db/mock"
-	db "github.com/jonaxn/banksystem/db/sqlc"
-	"github.com/jonaxn/banksystem/token"
-	"github.com/jonaxn/banksystem/util"
 	"github.com/stretchr/testify/require"
 )
 
