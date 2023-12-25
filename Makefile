@@ -4,16 +4,16 @@ network:
 	docker network create bank-network
 
 postgres:
-	docker run --name postgres12 --network bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:12-alpine
+	docker run --name postgres --network bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:14-alpine
 
 mysql:
 	docker run --name mysql8 -p 3306:3306  -e MYSQL_ROOT_PASSWORD=secret -d mysql:8
 
 createdb:
-	docker exec -it postgres12 createdb --username=root --owner=root bank_system
+	docker exec -it postgres createdb --username=root --owner=root bank_system
 
 dropdb:
-	docker exec -it postgres12 dropdb bank_system
+	docker exec -it postgres dropdb bank_system
 
 migrateup:
 	migrate -path db/migration -database "$(DB_URL)" -verbose up
@@ -47,10 +47,13 @@ mock:
 
 proto:
 	rm -f pb/*.go
+	rm -f doc/swagger/*.swagger.json
 	protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative \
 	--go-grpc_out=pb --go-grpc_opt=paths=source_relative \
 	--grpc-gateway_out=pb --grpc-gateway_opt=paths=source_relative \
+	--openapiv2_out=doc/swagger --openapiv2_opt=allow_merge=true,merge_file_name=bank_system \
 	proto/*.proto
+	statik -src=./doc/swagger -dest=./doc
 
 evans:
 	evans --host localhost --port 9090 -r repl
