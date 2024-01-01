@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bank-system-ingress-http
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "api.banksystemtest.com"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: bank-system-api-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - api.banksystemtest.com
+      secretName: bank-system-api-cert
